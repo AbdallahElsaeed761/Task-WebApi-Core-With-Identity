@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task_WebApi_Core_With_Identity.Interfaces;
 using Task_WebApi_Core_With_Identity.Models;
 
 namespace Task_WebApi_Core_With_Identity.Services
 {
-    public class BookServices
+    public class BookServices:IBook
     {
         private readonly MyDbContext _db;
 
@@ -15,7 +16,7 @@ namespace Task_WebApi_Core_With_Identity.Services
             _db = db;
         }
         //get All Books
-        public List<Book> books()
+        public List<Book> GetAllbooks()
         {
             return _db.Books.ToList();
         }

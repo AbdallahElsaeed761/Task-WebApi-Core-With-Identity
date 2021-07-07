@@ -14,6 +14,7 @@ namespace Task_WebApi_Core_With_Identity.Models
         public virtual List<Book> Books { get; set; }
         [ForeignKey("Customer")]
         public string CustomerID { get; set; }
+
         public virtual Customer Customer { get; set; }
     }
 }

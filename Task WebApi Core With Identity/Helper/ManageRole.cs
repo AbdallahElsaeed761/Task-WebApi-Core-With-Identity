@@ -44,7 +44,7 @@ namespace Task_WebApi_Core_With_Identity.Helper
 
        
 
-        // add to  seller
+        // add to  Author
 
         public async Task<bool> AddToAuthorRole(ApplicationUser user)
         {

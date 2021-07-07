@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace Task_WebApi_Core_With_Identity.ViewModel
 {
-    public class RegisterAuthorViewModel
+    public class RegisterAuthorViewModel:RegisterViewModel
     {
-        [Required]
-        [RegularExpression("^01[0125][0-9]{8}$")]
-        public string PhoneNumber { get; set; }
-
+        public DateTime PublishDate { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 5)]
-        public string StoreName { get; set; }
+        public float SalaryOfBook { get; set; }
 
     }
 }

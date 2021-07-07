@@ -17,8 +17,7 @@ namespace Task_WebApi_Core_With_Identity.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
         
         //public virtual List<Book> Books { get; set; }
-        [ForeignKey("ShoppingBasketBook")]
-        public int ShoppingBasketBookID { get; set; }
-        public virtual ShoppingBasketBook ShoppingBasketBook { get; set; }
+       
+        public virtual List< ShoppingBasketBook> ShoppingBasketBooks { get; set; }
     }
 }

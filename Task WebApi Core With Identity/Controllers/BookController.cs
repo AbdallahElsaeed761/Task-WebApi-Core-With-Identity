@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task_WebApi_Core_With_Identity.Interfaces;
 using Task_WebApi_Core_With_Identity.Models;
 using Task_WebApi_Core_With_Identity.Services;
 
@@ -13,15 +15,24 @@ namespace Task_WebApi_Core_With_Identity.Controllers
     [ApiController]
     public class BookController : Controller
     {
-        private readonly BookServices _bookServices;
+        private readonly IBook _bookServices;
 
-        public BookController(BookServices bookServices)
+        public BookController(IBook bookServices)
         {
             _bookServices = bookServices;
         }
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+        //Get All Book
+        [HttpGet]
+        public ActionResult<List<Book>> GetAllBook()
         {
-            return View();
+            var result = _bookServices.GetAllbooks();
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
         // get brand by id
         [HttpGet("{id}")]
@@ -33,6 +44,7 @@ namespace Task_WebApi_Core_With_Identity.Controllers
             return Ok(result);
         }
         // add brand
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<Book> AddBook([FromBody] Book b)
         {
@@ -50,6 +62,7 @@ namespace Task_WebApi_Core_With_Identity.Controllers
 
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = "Author")]
         public ActionResult EditBook(int id, [FromBody] Book b)
         {
 
@@ -69,6 +82,7 @@ namespace Task_WebApi_Core_With_Identity.Controllers
         }
 
         // delete category
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public ActionResult deleteBook(int id)
         {
